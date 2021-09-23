@@ -519,7 +519,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler{
     intent1.setDataAndType(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
     Intent chooser = new Intent(Intent.ACTION_CHOOSER);
-    chooser.putExtra(Intent.EXTRA_TITLE, "选择图片");
+    chooser.putExtra(Intent.EXTRA_TITLE, "이미지 선택");
     chooser.putExtra(Intent.EXTRA_INTENT,intent1);
 
     if (WebViewFlutterPlugin.activity != null){
@@ -533,7 +533,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler{
     if (WebViewFlutterPlugin.activity==null||!FileUtil.checkSDcard(WebViewFlutterPlugin.activity)) {
       return;
     }
-    String[] selectPicTypeStr = {"拍照", "图库"};
+    /*String[] selectPicTypeStr = {"사진", "갤러리"};
     new AlertDialog.Builder(WebViewFlutterPlugin.activity)
             .setOnCancelListener(new ReOnCancelListener())
             .setItems(selectPicTypeStr,
@@ -553,7 +553,8 @@ public class FlutterWebView implements PlatformView, MethodCallHandler{
                             break;
                         }
                       }
-                    }).show();
+                    }).show();*/
+    openImageChooserActivity();
   }
 
   /**
@@ -640,7 +641,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler{
       if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
         openCamera();
       } else {
-        Toast.makeText(WebViewFlutterPlugin.activity, "拍照需要您授予相机权限", Toast.LENGTH_SHORT).show();
+        Toast.makeText(WebViewFlutterPlugin.activity, "사진을 찍으려면 카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
         if (uploadMessage != null) {
           uploadMessage.onReceiveValue(null);
           uploadMessage = null;
